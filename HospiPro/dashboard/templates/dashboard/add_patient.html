@@ -1,0 +1,77 @@
+{% extends 'dashboard/base.html' %} 
+
+{% load static %}
+
+{%block title%}
+    Add Patient
+{%endblock%}
+
+{%block extra_css%}<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">{%endblock%}
+
+{%block content%}
+<div class="container">
+    <header>Registration for User</header>
+    {{message|safe}}
+    <form action="/add_patient" method="POST">
+        {% csrf_token %}
+        <div class="form first">
+            <div class="details personal">
+                <span class="title">Add Patient</span>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label>First Name</label>
+                        <input type="text" placeholder="Enter your first name" required name="first_name" autofocus="true">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Enter your last name" required name="last_name">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Age</label>
+                        <input type="number" placeholder="Enter Age" required min="16" name="age">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Mobile Number</label>
+                        <input type="string" placeholder="Enter mobile number" required name="mobile_number" minlength="10" maxlength="10" pattern="[0-9]{10}">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Gender</label>
+                        <select required name="gender">
+                            <option >Select gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Occupation</label>
+                        <select required name="occupation">
+                            <option>Student</option>
+                            <option>Office employee</option>
+                            <option>Teacher</option>
+                            <option>Docter</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Email Address" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"  required>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <button   class="nextBtn" style="align-self: flex-end;" type="submit">
+                    <span class="btnText">Sign Up</span>
+                    <i class="uil uil-navigator"></i>
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>
+{%endblock%}
