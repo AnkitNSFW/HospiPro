@@ -7,8 +7,15 @@ def home(response):
 
 
 
+
 def add_patient(response):
     if response.method == "POST":
         return redirect("/")
     else:
         return render(response, 'dashboard/add_patient.html')
+    
+def add_doctor(response):
+    if response.method == "POST":
+        return redirect("/")
+    else:
+        return render(response, 'dashboard/add_doctor.html')

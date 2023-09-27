@@ -3,20 +3,23 @@
 {% load static %}
 
 {%block title%}
-    Add Patient
+    Add Doctor
 {%endblock%}
 
-{%block extra_css%}<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">{%endblock%}
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/add_doctor.css' %}">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+{%endblock%}
 
 {%block content%}
 <div class="container">
     <header>Registration for User</header>
     {{message|safe}}
-    <form action="/add_patient" method="POST">
+    <form action="/add_doctor" method="POST">
         {% csrf_token %}
         <div class="form first">
             <div class="details personal">
-                <span class="title">Add Patient</span>
+                <span class="title">Add Doctor</span>
 
                 <div class="fields">
                     <div class="input-field">
@@ -50,6 +53,34 @@
                     </div>
 
                     <div class="input-field">
+                        <label>Medical License Number</label>
+                        <input type="string" placeholder="Enter Medical License Number" required name="medical_licence_numbar" pattern="[0-9]" >
+                    </div>
+
+                    <div class="input-field">
+                        <label>Specialty</label>
+                        <select required name="specialty">
+                            <option disabled selected>Select specialty</option>
+                            <option>General</option>
+                            <option>Pediatrics</option>
+                            <option>Cardiology</option>
+                            <option>Orthopedics</option>
+                            <option>Obstetrics and Gynecology</option>
+                            <option>Neurology</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Availability</label>
+                        <select required name="availability">
+                            <option disabled selected>Select specialty</option>
+                            <option>Full-time</option>
+                            <option>Part-time</option>
+                            <option>Shifts</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
                         <label>Addres</label>
                         <input type="string" placeholder="Enter Address" required name="address" maxlength="200">
                     </div>
@@ -60,14 +91,13 @@
                     </div>
 
                     <div class="input-field">
-                        <label>Assigned Room</label>
-                        <input type="number" placeholder="room_no" required name="room_no">
-                    </div>
-                    
-
-                    <div class="input-field">
                         <label>Email</label>
                         <input type="email" name="email" placeholder="Email Address" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"  required>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Experience</label>
+                        <input type="string" name="experience" placeholder="Years" pattern="[0-9]"  required>
                     </div>
                 </div>
             </div>
