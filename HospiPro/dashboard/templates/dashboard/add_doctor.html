@@ -13,14 +13,12 @@
 
 {%block content%}
 <div class="container">
-    <header>Registration for User</header>
+    <header>Add Doctor</header>
     {{message|safe}}
     <form action="/add_doctor" method="POST">
         {% csrf_token %}
         <div class="form first">
             <div class="details personal">
-                <span class="title">Add Doctor</span>
-
                 <div class="fields">
                     <div class="input-field">
                         <label>First Name</label>
@@ -54,7 +52,7 @@
 
                     <div class="input-field">
                         <label>Medical License Number</label>
-                        <input type="string" placeholder="Enter Medical License Number" required name="medical_licence_numbar" pattern="[0-9]" >
+                        <input type="number" placeholder="Enter Medical License Number" required name="medical_licence_numbar">
                     </div>
 
                     <div class="input-field">
@@ -97,7 +95,7 @@
 
                     <div class="input-field">
                         <label>Experience</label>
-                        <input type="string" name="experience" placeholder="Years" pattern="[0-9]"  required>
+                        <input type="string" name="experience" placeholder="Years"  required>
                     </div>
                 </div>
             </div>

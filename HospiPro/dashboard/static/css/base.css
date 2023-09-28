@@ -32,7 +32,7 @@ body{
 
   /* Style page content */
   .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-left: 165px; /* Same as the width of the sidebar */
     padding: 60px;
     background: transparent;
   }
@@ -42,3 +42,17 @@ body{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 15;}
   }
+
+
+  .seperation {
+    height: 5px; 
+    width: 160px; 
+    background: orange; 
+    margin: 10px 0%;
+  }
+
+.horizontal {
+  width: 5px;
+  height: 100%;
+  background: orange;
+}

@@ -6,18 +6,19 @@
     Add Patient
 {%endblock%}
 
-{%block extra_css%}<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">{%endblock%}
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+{%endblock%}
 
 {%block content%}
 <div class="container">
-    <header>Registration for User</header>
+    <header>Add Patient</header>
     {{message|safe}}
     <form action="/add_patient" method="POST">
         {% csrf_token %}
         <div class="form first">
             <div class="details personal">
-                <span class="title">Add Patient</span>
-
                 <div class="fields">
                     <div class="input-field">
                         <label>First Name</label>
@@ -69,6 +70,22 @@
                         <label>Email</label>
                         <input type="email" name="email" placeholder="Email Address" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"  required>
                     </div>
+
+                    <div class="input-field">
+                        <label>Blood Group</label>
+                        <select required name="gender">
+                            <option disabled selected>Select gender</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                        </select>
+                    </div>
+
                 </div>
             </div>
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
