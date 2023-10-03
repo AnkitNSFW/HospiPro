@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %} 
+
+{% load static %}
+
+{%block title%}
+    Patients
+{%endblock%}
+
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/patient.css' %}">
+{%endblock%}
+
+
+{%block content%}
+    <table>
+        {{table_html|safe}}
+    </table>
+{%endblock%}

@@ -19,3 +19,18 @@ class DB_Doctor(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
+class DB_Patient(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    gender = models.CharField(max_length=20)
+    mobile_number = models.CharField(max_length=10)
+    emergency_contact = models.CharField(max_length=10)
+    address = models.CharField(max_length=200)
+    age = models.PositiveIntegerField()
+    room_no = models.PositiveIntegerField()
+    email = models.EmailField()
+    blood_group = models.CharField(max_length=4)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
