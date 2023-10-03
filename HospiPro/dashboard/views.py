@@ -1,23 +1,28 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import DB_Doctor, DB_Patient
+from .models import Doctor, Patient
 
 # Create your views here.
 def home(response):
     return render(response, 'dashboard/home.html')
 
 def patients(response):
-    patients = DB_Patient.objects.all()
     context = {}
-    context['table_html'] = ''''''
-    for patient  in patients:
-        context['table_html'] += f'''
-            <tr>
-                <th>{patient.first_name}</th>
-                <th>{patient.gender}</th>
-                <th>{patient.age}</th>
-            </tr>
-        '''
+    context['patients'] = Patient.objects.all()
+    context['individual_patient'] = None
+    context['user_not_found'] = False
+    return render(response, 'dashboard/patients.html', context=context)
+
+def patients_id(response, id):
+    context = {}
+    context['patients'] = None
+    try:
+        context['individual_patient'] = Patient.objects.get(id=id)
+        context['user_not_found'] = False
+    except:
+        context['individual_patient'] = []
+        context['user_not_found'] = True
+
     return render(response, 'dashboard/patients.html', context=context)
 
 
@@ -35,7 +40,7 @@ def add_patient(response):
         blood_group = response.POST['blood_group']
 
         # Create a new Patient instance and save it to the database
-        patient = DB_Patient(
+        patient = Patient(
             first_name=first_name,
             last_name=last_name,
             gender=gender,
@@ -70,7 +75,7 @@ def add_doctor(response):
         print(first_name, gender)
 
         # Create a new Doctor instance and save it to the database
-        doctor = DB_Doctor(
+        doctor = Doctor(
             first_name=first_name,
             last_name=last_name,
             gender=gender,

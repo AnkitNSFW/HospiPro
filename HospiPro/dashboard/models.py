@@ -2,7 +2,8 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 
-class DB_Doctor(models.Model):
+class Doctor(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=20)
@@ -20,7 +21,8 @@ class DB_Doctor(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
-class DB_Patient(models.Model):
+class Patient(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=20)

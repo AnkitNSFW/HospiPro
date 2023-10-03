@@ -1,0 +1,29 @@
+.patient-table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    padding: 15px;
+    text-align: left;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+  }
+
+  th {
+    color: orange;
+  }
+  .patient-data {color: white;}
+  .patient-data:hover {color: orange;}
+
+
+.user_not_found_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;}
+
+.user_not_found_h1 {
+    color: orange;
+}
