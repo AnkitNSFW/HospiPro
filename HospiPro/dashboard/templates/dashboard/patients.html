@@ -13,6 +13,14 @@
 
 
 {%block content%}
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
+            <button type="submit" class="searchButton" id="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
     {% if user_not_found %}
         <div class="user_not_found_div">
             <h1 class="user_not_found_h1">User Not Found</h1>
@@ -20,15 +28,6 @@
     {% else %}
         <table class="patient-table">
             {% if patients %}
-                <div class="wrap">
-                    <div class="search">
-                        <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
-                        <button type="submit" class="searchButton" id="searchButton">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <tr>
                     <th>Name</th>
                     <th>Gender</th>
@@ -39,7 +38,7 @@
                 {% for patient in patients %}
                     <tr class="patient-data">
                         <td>
-                            <a href="patients/{{ patient.id }}" style="color: white;">
+                            <a href="/patients/{{ patient.id }}" style="color: white;">
                                 {{ patient.first_name }} {{ patient.last_name }}
                             </a>
                         </td>
@@ -55,9 +54,7 @@
                         <td>{{patient.blood_group}}</td>
                     </tr>
                 {% endfor %}
-            {% endif %}
-
-            {% if individual_patient %}
+            {% elif individual_patient%}
                 <tr class="patient-data">
                     <th>ID</th>
                     <td>{{individual_patient.id}}</td>
@@ -102,7 +99,11 @@
                     <th>Blood Group</th>
                     <td>{{individual_patient.blood_group}}</td>
                 </tr>
-            {% endif %}
+            {% else %}
+                <div class="user_not_found_div">
+                    <h1 class="user_not_found_h1">User Not Found</h1>
+                </div>
+            {%endif%}
         {% endif %}
     </table>
 {%endblock%}
@@ -116,7 +117,11 @@
             // Check if the search term is not empty
             if (searchTerm !== "") {
                 // Redirect to the /search/ URL with the search term as a parameter
-                window.location.href = "patients/search/" +searchTerm;
+                const currentURL = window.location.href;
+                const baseUrl = currentURL.split("/search/")[0]; // Extract the base URL
+                const newURL = baseUrl + "/search/" + searchTerm;
+
+                window.location.href = newURL;
             }
         });
     </script>

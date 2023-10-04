@@ -117,9 +117,9 @@ def add_doctor(response):
         return render(response, 'dashboard/add_doctor.html')
 
 
-def api_add_patient(response):
+def api_add_patient(response, num):
     # Create a new Patient instance and save it to the database
-    for _ in range(5):
+    for _ in range(num):
         patient = Patient(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
@@ -134,10 +134,9 @@ def api_add_patient(response):
         )
         patient.save()
 
-    return render(response, 'dashboard/home.html')
+    return redirect('/patients')
 
 def delete_all_patient(response):
     for patient in Patient.objects.all():
         patient.delete()
-    
-    return render(response, 'dashboard/home.html')
+    return redirect('/patients')

@@ -10,6 +10,6 @@ urlpatterns = [
     path('add_patient', views.add_patient, name='add_patient'),
     path('add_doctor', views.add_doctor, name='add_doctor'),
 
-    path('api_add_patient', views.api_add_patient, name='api_patinet'),
+    path('api_add_patient/<int:num>', views.api_add_patient, name='api_patinet'),
     path('delete_all_patient', views.delete_all_patient, name='delete_all_patinet'),
 ]
