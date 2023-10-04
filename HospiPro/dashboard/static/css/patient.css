@@ -2,6 +2,10 @@
     border-collapse: collapse;
 }
 
+tr {
+  width: 1000px;
+}
+
 table, th, td {
     padding: 15px;
     text-align: left;
@@ -26,4 +30,38 @@ table, th, td {
 
 .user_not_found_h1 {
     color: orange;
+}
+
+
+
+/* search Bar */
+.search {
+  width: 100%;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid orange;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: black;
+}
+
+.searchTerm:focus{
+  color: orange;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid orange;
+  background: orange;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
 }

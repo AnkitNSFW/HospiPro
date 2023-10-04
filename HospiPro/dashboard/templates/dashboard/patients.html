@@ -8,6 +8,7 @@
 
 {%block extra_css%}
 <link rel="stylesheet" href="{% static 'css/patient.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {%endblock%}
 
 
@@ -19,6 +20,15 @@
     {% else %}
         <table class="patient-table">
             {% if patients %}
+                <div class="wrap">
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
+                        <button type="submit" class="searchButton" id="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
                 <tr>
                     <th>Name</th>
                     <th>Gender</th>
@@ -95,4 +105,19 @@
             {% endif %}
         {% endif %}
     </table>
+{%endblock%}
+
+{%block extra_js%}
+    <script>
+        document.getElementById("searchButton").addEventListener("click", function() {
+            // Get the search term entered by the user
+            const searchTerm = document.getElementById("searchInput").value.trim();
+
+            // Check if the search term is not empty
+            if (searchTerm !== "") {
+                // Redirect to the /search/ URL with the search term as a parameter
+                window.location.href = "patients/search/" +searchTerm;
+            }
+        });
+    </script>
 {%endblock%}

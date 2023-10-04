@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Doctor, Patient
 
+import random
+from faker import Faker          
+fake = Faker() 
+fake.random.seed(69420)
+
+
 # Create your views here.
 def home(response):
     return render(response, 'dashboard/home.html')
@@ -21,6 +27,21 @@ def patients_id(response, id):
         context['user_not_found'] = False
     except:
         context['individual_patient'] = []
+        context['user_not_found'] = True
+
+    return render(response, 'dashboard/patients.html', context=context)
+
+def patients_search(response):
+    return redirect('patients')
+
+def patients_to_search(response, to_search):
+    context = {}
+    context['individual_patient'] = None
+    try:
+        context['patients'] = Patient.search(to_search)
+        context['user_not_found'] = False
+    except:
+        context['patients'] = []
         context['user_not_found'] = True
 
     return render(response, 'dashboard/patients.html', context=context)
@@ -94,3 +115,29 @@ def add_doctor(response):
         return redirect("/")
     else:
         return render(response, 'dashboard/add_doctor.html')
+
+
+def api_add_patient(response):
+    # Create a new Patient instance and save it to the database
+    for _ in range(5):
+        patient = Patient(
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            gender=random.choice(['Male','Female','Transgender']),
+            mobile_number=random.randint(111111111, 9999999999),
+            emergency_contact=random.randint(111111111, 9999999999),
+            address=fake.address(),
+            age=random.randint(0,100),
+            room_no=random.randint(0,50),
+            email=fake.email(),
+            blood_group=random.choice(['A+','A-','B+','B-','AB+','AB-','O+','O-'])
+        )
+        patient.save()
+
+    return render(response, 'dashboard/home.html')
+
+def delete_all_patient(response):
+    for patient in Patient.objects.all():
+        patient.delete()
+    
+    return render(response, 'dashboard/home.html')
