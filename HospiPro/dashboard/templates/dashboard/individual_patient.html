@@ -1,0 +1,83 @@
+{% extends 'dashboard/base.html' %} 
+
+{% load static %}
+
+{%block title%}
+    Patients
+{%endblock%}
+
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/individual_patient.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{%endblock%}
+
+
+{%block content%}
+    {% if patient %}
+        <div>
+            <a><button class="bn-32 bn32" onclick="go_back()"><- Go Back<Back</button></a>
+        </div>
+        <div>
+            <table class="patient-table">
+                <tr>
+                    <th class="patient-label">ID</th>
+                    <td>{{patient.id}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">First Name</th>
+                    <td>{{patient.first_name}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Last Name</th>
+                    <td>{{patient.last_name}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Gender</th>
+                    <td>{{patient.gender}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Mobile Number</th>
+                    <td>{{patient.mobile_number}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Emergency Contact</th>
+                    <td>{{patient.emergency_contact}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Address</th>
+                    <td>{{patient.address}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Age</th>
+                    <td>{{patient.age}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Room Number</th>
+                    <td>{{patient.room_no}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Email</th>
+                    <td>{{patient.email}}</td>
+                </tr>
+                <tr>
+                    <th class="patient-label">Blood Group</th>
+                    <td>{{patient.blood_group}}</td>
+                </tr>
+            </table>
+        </div>
+    {% else %}
+        <div class="user_not_found_div">
+            <h1 class="user_not_found_h1">User Not Found</h1>
+        </div>
+    {%endif%}
+{%endblock%}
+
+
+
+{%block extra_js%}
+    <script>
+        function go_back(){
+            window.history.back()
+        }
+    </script>
+{%endblock%}

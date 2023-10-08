@@ -15,34 +15,30 @@ def home(response):
 def patients(response):
     context = {}
     context['patients'] = Patient.objects.all()
-    context['individual_patient'] = None
-    context['user_not_found'] = False
     return render(response, 'dashboard/patients.html', context=context)
 
 def patients_id(response, id):
     context = {}
-    context['patients'] = None
+    context['patient'] = None
     try:
-        context['individual_patient'] = Patient.objects.get(id=id)
-        context['user_not_found'] = False
+        context['patient'] = Patient.objects.get(id=id)
     except:
-        context['individual_patient'] = []
-        context['user_not_found'] = True
+        context['patient'] = []
+    print(id)
+    return render(response, 'dashboard/individual_patient.html', context=context)
 
-    return render(response, 'dashboard/patients.html', context=context)
-
+# if someone directly goes to /search/ without to_srarch redirecting to /patient
 def patients_search(response):
     return redirect('patients')
 
 def patients_to_search(response, to_search):
     context = {}
-    context['individual_patient'] = None
     try:
-        context['patients'] = Patient.search(to_search)
-        context['user_not_found'] = False
+        context['patient'] = Patient.search(to_search)
     except:
-        context['patients'] = []
-        context['user_not_found'] = True
+        context['patient'] = []
+
+    print(len( context['patient']))
 
     return render(response, 'dashboard/patients.html', context=context)
 

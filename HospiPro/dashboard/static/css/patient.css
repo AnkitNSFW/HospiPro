@@ -2,10 +2,6 @@
     border-collapse: collapse;
 }
 
-tr {
-  width: 1000px;
-}
-
 table, th, td {
     padding: 15px;
     text-align: left;
@@ -64,4 +60,12 @@ table, th, td {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
+}
+
+
+.name_width{
+  width: 200px;
+}
+.short_width{
+  width: 100px;
 }

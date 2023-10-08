@@ -13,99 +13,49 @@
 
 
 {%block content%}
-    <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
-            <button type="submit" class="searchButton" id="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
+    {% if patients %}
+        <div class="wrap">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
+                <button type="submit" class="searchButton" id="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
-    </div>
-    {% if user_not_found %}
-        <div class="user_not_found_div">
-            <h1 class="user_not_found_h1">User Not Found</h1>
-        </div>
-    {% else %}
+
         <table class="patient-table">
-            {% if patients %}
-                <tr>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Age</th>
-                    <th>room_no</th>
-                    <th>Blood Group</th>
-                </tr>
-                {% for patient in patients %}
-                    <tr class="patient-data">
-                        <td>
-                            <a href="/patients/{{ patient.id }}" style="color: white;">
-                                {{ patient.first_name }} {{ patient.last_name }}
-                            </a>
-                        </td>
-                        {% if patient.gender == "Male" %}
-                            <td>M</td>
-                        {% elif patient.gender == "Female" %}
-                            <td>F</td>
-                        {% else %}
-                            <td>T</td>
-                        {% endif %}
-                        <td>{{patient.age}}</td>
-                        <td>{{patient.room_no}}</td>
-                        <td>{{patient.blood_group}}</td>
-                    </tr>
-                {% endfor %}
-            {% elif individual_patient%}
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>room_no</th>
+                <th>Blood Group</th>
+            </tr>
+            {% for patient in patients %}
                 <tr class="patient-data">
-                    <th>ID</th>
-                    <td>{{individual_patient.id}}</td>
+                    <td class="name_width">
+                        <a href="/patients/{{ patient.id }}" style="color: white;">
+                            {{ patient.first_name }} {{ patient.last_name }}
+                        </a>
+                    </td>
+                    {% if patient.gender == "Male" %}
+                        <td class="short_width">M</td>
+                    {% elif patient.gender == "Female" %}
+                        <td class="short_width">F</td>
+                    {% else %}
+                        <td class="short_width">T</td>
+                    {% endif %}
+                    <td class="short_width">{{patient.age}}</td>
+                    <td class="short_width">{{patient.room_no}}</td>
+                    <td class="short_width">{{patient.blood_group}}</td>
                 </tr>
-                <tr class="patient-data">
-                    <th>First Name</th>
-                    <td>{{individual_patient.first_name}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Last Name</th>
-                    <td>{{individual_patient.last_name}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Gender</th>
-                    <td>{{individual_patient.gender}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Mobile No</th>
-                    <td>{{individual_patient.mobile_number}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Emergency Contact</th>
-                    <td>{{individual_patient.emergency_contact}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Address</th>
-                    <td>{{individual_patient.address}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Age</th>
-                    <td>{{individual_patient.age}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Room No</th>
-                    <td>{{individual_patient.room_no}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Email</th>
-                    <td>{{individual_patient.email}}</td>
-                </tr>
-                <tr class="patient-data">
-                    <th>Blood Group</th>
-                    <td>{{individual_patient.blood_group}}</td>
-                </tr>
-            {% else %}
-                <div class="user_not_found_div">
-                    <h1 class="user_not_found_h1">User Not Found</h1>
-                </div>
-            {%endif%}
-        {% endif %}
-    </table>
+            {%endfor%}
+        </table>
+        {%else%}
+            <div class="user_not_found_div">
+                <h1 class="user_not_found_h1">User Not Found</h1>
+            </div>
+        {%endif%}
 {%endblock%}
 
 {%block extra_js%}
