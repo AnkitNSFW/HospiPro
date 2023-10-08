@@ -16,10 +16,7 @@
     {% if patients %}
         <div class="wrap">
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?" id="searchInput">
-                <button type="submit" class="searchButton" id="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
+                <input type="text" class="searchTerm" placeholder="Who are you looking for?" id="searchInput">
             </div>
         </div>
 
@@ -32,23 +29,25 @@
                 <th>Blood Group</th>
             </tr>
             {% for patient in patients %}
-                <tr class="patient-data">
-                    <td class="name_width">
-                        <a href="/patients/{{ patient.id }}" style="color: white;">
-                            {{ patient.first_name }} {{ patient.last_name }}
-                        </a>
-                    </td>
-                    {% if patient.gender == "Male" %}
-                        <td class="short_width">M</td>
-                    {% elif patient.gender == "Female" %}
-                        <td class="short_width">F</td>
-                    {% else %}
-                        <td class="short_width">T</td>
-                    {% endif %}
-                    <td class="short_width">{{patient.age}}</td>
-                    <td class="short_width">{{patient.room_no}}</td>
-                    <td class="short_width">{{patient.blood_group}}</td>
-                </tr>
+                <a href="/patients/{{ patient.id }}">
+                    <tr class="patient-data">
+                        <td class="name_width">
+                            <a href="/patients/{{ patient.id }}" style="color: white;">
+                                {{ patient.first_name }} {{ patient.last_name }}
+                            </a>
+                        </td>
+                        {% if patient.gender == "Male" %}
+                            <td class="short_width">M</td>
+                        {% elif patient.gender == "Female" %}
+                            <td class="short_width">F</td>
+                        {% else %}
+                            <td class="short_width">T</td>
+                        {% endif %}
+                        <td class="short_width">{{patient.age}}</td>
+                        <td class="short_width">{{patient.room_no}}</td>
+                        <td class="short_width">{{patient.blood_group}}</td>
+                    </tr>
+                </a>
             {%endfor%}
         </table>
         {%else%}
@@ -60,8 +59,7 @@
 
 {%block extra_js%}
     <script>
-        document.getElementById("searchButton").addEventListener("click", function() {
-            // Get the search term entered by the user
+        function handleInput() {
             const searchTerm = document.getElementById("searchInput").value.trim();
 
             // Check if the search term is not empty
@@ -73,6 +71,15 @@
 
                 window.location.href = newURL;
             }
-        });
+        }
+
+        document.getElementById("searchInput").addEventListener("keyup", function(event) {
+            // Check if the "Enter" key (key code 13) was pressed
+            if (event.keyCode === 13) {
+                // Call the handleInput function when "Enter" is pressed
+                handleInput();
+            }
+        }
+        )
     </script>
 {%endblock%}

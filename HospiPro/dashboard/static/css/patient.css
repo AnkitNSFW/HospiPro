@@ -12,10 +12,10 @@ table, th, td {
   }
 
   th {
-    color: orange;
+    color: white;
+    font-weight: bold;
   }
   .patient-data {color: white;}
-  .patient-data:hover {color: orange;}
 
 
 .user_not_found_div{
@@ -29,38 +29,24 @@ table, th, td {
 }
 
 
-
-/* search Bar */
-.search {
-  width: 100%;
-}
-
 .searchTerm {
-  width: 100%;
-  border: 3px solid orange;
+  width: 200px;
+  border: 3px solid white;
   border-right: none;
   padding: 5px;
-  height: 20px;
+  height: 40px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: black;
 }
 
-.searchTerm:focus{
-  color: orange;
+
+.searchTerm{
+  color: white;
+  caret-color:transparent;
+  background: none;
 }
 
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid orange;
-  background: orange;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-}
 
 
 .name_width{

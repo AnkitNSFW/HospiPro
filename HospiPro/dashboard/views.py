@@ -5,8 +5,6 @@ from .models import Doctor, Patient
 import random
 from faker import Faker          
 fake = Faker() 
-fake.random.seed(69420)
-
 
 # Create your views here.
 def home(response):
