@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+
+{%block title%}
+    Doctors
+{%endblock%}
+
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/doctor.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{%endblock%}
+
+
+{%block content%}
+    {% if doctors %}
+        <div class="wrap">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Who are you looking for?" id="searchInput">
+            </div>
+        </div>
+        <br><br>
+        <table class="doctor-table">
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>room_no</th>
+                <th>Blood Group</th>
+            </tr>
+            {% for doctor in doctors %}
+                <tr class="doctor-data">
+                    <td class="name_width">
+                        <a href="/doctors/{{ doctor.id }}" style="color: white; font-weight: bold;">
+                            {{ doctor.first_name }} {{ doctor.last_name }}
+                        </a>
+                    </td>
+                    {% if doctor.gender == "Male" %}
+                        <td class="short_width">M</td>
+                    {% elif doctor.gender == "Female" %}
+                        <td class="short_width">F</td>
+                    {% else %}
+                        <td class="short_width">T</td>
+                    {% endif %}
+                    <td class="short_width">{{doctor.age}}</td>
+                    <td class="short_width">{{doctor.room_no}}</td>
+                    <td class="short_width">{{doctor.blood_group}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+        {%else%}
+            <div class="user_not_found_div">
+                <h1 class="user_not_found_h1">User Not Found</h1>
+            </div>
+        {%endif%}
+{%endblock%}
+
+{%block extra_js%}
+    <script>
+        function handleInput() {
+            const searchTerm = document.getElementById("searchInput").value.trim();
+
+            // Check if the search term is not empty
+            if (searchTerm !== "") {
+                // Redirect to the /search/ URL with the search term as a parameter
+                const currentURL = window.location.href;
+                const baseUrl = currentURL.split("/search/")[0]; // Extract the base URL
+                const newURL = baseUrl + "/search/" + searchTerm;
+
+                window.location.href = newURL;
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("keyup", function(event) {
+            // Check if the "Enter" key (key code 13) was pressed
+            if (event.keyCode === 13) {
+                // Call the handleInput function when "Enter" is pressed
+                handleInput();
+            }
+        }
+        )
+    </script>
+{%endblock%}

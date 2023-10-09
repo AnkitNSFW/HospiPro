@@ -38,6 +38,34 @@ def patients_to_search(response, to_search):
 
     return render(response, 'dashboard/patients.html', context=context)
 
+def doctors(response):
+    context = {}
+    context['doctors'] = Doctor.objects.all()
+    return render(response, 'dashboard/doctors.html', context=context)
+
+def doctors_id(response, id):
+    context = {}
+    context['doctor'] = None
+    try:
+        context['doctor'] = Doctor.objects.get(id=id)
+    except:
+        context['doctor'] = []
+    print(id)
+    return render(response, 'dashboard/individual_doctor.html', context=context)
+
+# if someone directly goes to /search/ without to_srarch redirecting to /doctor
+def doctors_search(response):
+    return redirect('doctors')
+
+def doctors_to_search(response, to_search):
+    context = {}
+    try:
+        context['doctors'] = Doctor.search(to_search)
+    except:
+        context['doctors'] = []
+
+    return render(response, 'dashboard/doctors.html', context=context)
+
 
 def add_patient(response):
     if response.method == "POST":
@@ -128,7 +156,32 @@ def api_add_patient(response, num):
 
     return redirect('/patients')
 
+
+def api_add_doctor(response, num):
+    # Create a new Patient instance and save it to the database
+    for _ in range(num):
+        doctor = Doctor(
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            gender=random.choice(['Male','Female','Transgender']),
+            mobile_number=random.randint(111111111, 9999999999),
+            emergency_contact=random.randint(111111111, 9999999999),
+            medical_license_number=random.randint(1111, 99999),
+            specialty=random.choice(['General','Pediatrics','Cardiology','Orthopedics','Obstetrics and Gynecology','Neurology']),
+            availability=random.choice(['Full-time','Part-time','Shifts']),
+            address=fake.address(),
+            age=random.randint(0,100),
+            experience=random.randint(0,20)
+        )
+        doctor.save()
+    return redirect('/doctors')
+
 def delete_all_patient(response):
     for patient in Patient.objects.all():
         patient.delete()
     return redirect('/patients')
+
+def delete_all_doctor(response):
+    for doctor in Doctor.objects.all():
+        doctor.delete()
+    return redirect('/doctors')
