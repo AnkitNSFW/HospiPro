@@ -3,7 +3,11 @@
 {% load static %}
 
 {%block title%}
-    Patients
+    {% if patient %}
+        {{patient.first_name}} {{patient.last_name}}
+    {% else %}
+        User Not Found
+    {% endif %}
 {%endblock%}
 
 {%block extra_css%}

@@ -32,11 +32,9 @@ def patients_search(response):
 def patients_to_search(response, to_search):
     context = {}
     try:
-        context['patient'] = Patient.search(to_search)
+        context['patients'] = Patient.search(to_search)
     except:
-        context['patient'] = []
-
-    print(len( context['patient']))
+        context['patients'] = []
 
     return render(response, 'dashboard/patients.html', context=context)
 
