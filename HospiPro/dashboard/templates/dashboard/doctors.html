@@ -23,9 +23,9 @@
             <tr>
                 <th>Name</th>
                 <th>Gender</th>
-                <th>Age</th>
-                <th>room_no</th>
-                <th>Blood Group</th>
+                <th>Specialty</th>
+                <th>Availability</th>
+                <th>Mobile Nimber</th>
             </tr>
             {% for doctor in doctors %}
                 <tr class="doctor-data">
@@ -41,9 +41,9 @@
                     {% else %}
                         <td class="short_width">T</td>
                     {% endif %}
-                    <td class="short_width">{{doctor.age}}</td>
-                    <td class="short_width">{{doctor.room_no}}</td>
-                    <td class="short_width">{{doctor.blood_group}}</td>
+                    <td class="short_width">{{doctor.specialty}}</td>
+                    <td class="short_width">{{doctor.availability}}</td>
+                    <td class="short_width">{{doctor.mobile_number}}</td>
                 </tr>
             {%endfor%}
         </table>

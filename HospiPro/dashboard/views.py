@@ -137,6 +137,17 @@ def add_doctor(response):
         return render(response, 'dashboard/add_doctor.html')
 
 
+
+
+
+
+
+
+
+
+
+
+
 def api_add_patient(response, num):
     # Create a new Patient instance and save it to the database
     for _ in range(num):

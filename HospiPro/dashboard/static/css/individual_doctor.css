@@ -1,0 +1,43 @@
+.doctor-table {
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    border: 1px solid;
+    border-color: white;
+    border-radius: 20px;
+}
+
+.doctor-table th,
+.doctor-table td {
+    padding: 10px;
+    text-align: left;
+
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+
+}
+
+.doctor-table th {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+.doctor-table td {
+    color: white;
+    width: 400px;
+}
+.doctor-label {
+    font-weight: bold;
+}
+
+
+.bn32 {
+    background: black;
+    border-color: white;
+    border-radius: 10px;
+    padding: 0.6em 2.3em;
+    font-size: 1em;
+    color: white;
+  }
