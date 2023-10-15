@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Doctor, Patient
+from .generate_patient_and_doctor import *
 
-import random
-from faker import Faker          
-fake = Faker() 
 
 # Create your views here.
 def home(response):
@@ -58,12 +56,13 @@ def doctors_search(response):
     return redirect('doctors')
 
 def doctors_to_search(response, to_search):
+    print(to_search)
     context = {}
-    try:
-        context['doctors'] = Doctor.search(to_search)
-    except:
-        context['doctors'] = []
-
+    # try:
+    #     context['doctors'] = Doctor.search(to_search)
+    # except:
+    #     context['doctors'] = []
+    context['doctors'] = Doctor.search(to_search)
     return render(response, 'dashboard/doctors.html', context=context)
 
 
@@ -136,63 +135,33 @@ def add_doctor(response):
     else:
         return render(response, 'dashboard/add_doctor.html')
 
+def something_went_wrong(response):
+    return render(response, 'dashboard/something_went_wrong.html')
 
 
 
-
-
-
-
-
-
-
-
-
+# temp things
 def api_add_patient(response, num):
-    # Create a new Patient instance and save it to the database
-    for _ in range(num):
-        patient = Patient(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            gender=random.choice(['Male','Female','Transgender']),
-            mobile_number=random.randint(111111111, 9999999999),
-            emergency_contact=random.randint(111111111, 9999999999),
-            address=fake.address(),
-            age=random.randint(0,100),
-            room_no=random.randint(0,50),
-            email=fake.email(),
-            blood_group=random.choice(['A+','A-','B+','B-','AB+','AB-','O+','O-'])
-        )
-        patient.save()
-
-    return redirect('/patients')
+    if generate_patient(num):
+        return redirect('/patients')
+    else:
+        return redirect('/something_went_wrong')
 
 
 def api_add_doctor(response, num):
-    # Create a new Patient instance and save it to the database
-    for _ in range(num):
-        doctor = Doctor(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            gender=random.choice(['Male','Female','Transgender']),
-            mobile_number=random.randint(111111111, 9999999999),
-            emergency_contact=random.randint(111111111, 9999999999),
-            medical_license_number=random.randint(1111, 99999),
-            specialty=random.choice(['General','Pediatrics','Cardiology','Orthopedics','Obstetrics and Gynecology','Neurology']),
-            availability=random.choice(['Full-time','Part-time','Shifts']),
-            address=fake.address(),
-            age=random.randint(0,100),
-            experience=random.randint(0,20)
-        )
-        doctor.save()
-    return redirect('/doctors')
+    if generate_doctor(num):
+        return redirect('/doctors')
+    else:
+        return redirect('/something_went_wrong')
 
 def delete_all_patient(response):
-    for patient in Patient.objects.all():
-        patient.delete()
-    return redirect('/patients')
+    if delete_patients():
+        return redirect('/patients')
+    else:
+        return redirect('/something_went_wrong')
 
 def delete_all_doctor(response):
-    for doctor in Doctor.objects.all():
-        doctor.delete()
-    return redirect('/doctors')
+    if delete_doctors():
+        return redirect('/doctors')
+    else:
+        return redirect('/something_went_wrong')

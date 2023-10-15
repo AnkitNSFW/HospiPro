@@ -21,6 +21,14 @@ class Doctor(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
+    def search(q):
+        search_query = (Q(first_name__icontains=q) | Q(last_name__icontains=q) | Q(gender__icontains=q) | 
+                        Q(mobile_number__icontains=q) | Q(emergency_contact__icontains=q) | Q(address__icontains=q) | 
+                        Q(medical_license_number__icontains=q) | Q(specialty__icontains=q) | Q(availability__icontains=q) |
+                        Q(age__icontains=q) | Q(email__icontains=q) | Q(experience__icontains=q)
+        )
+        return Doctor.objects.filter(search_query)
+    
 
 class Patient(models.Model):
     id = models.AutoField(primary_key=True)
@@ -39,5 +47,8 @@ class Patient(models.Model):
         return f"{self.first_name} {self.last_name}"
     
     def search(q):
-        search_query = Q(first_name__icontains=q) | Q(last_name__icontains=q) | Q(gender__icontains=q) | Q(mobile_number__icontains=q) | Q(emergency_contact__icontains=q) | Q(address__icontains=q) | Q(age__icontains=q) | Q(room_no__icontains=q) | Q(blood_group__icontains=q)
+        search_query = (Q(first_name__icontains=q) | Q(last_name__icontains=q) | Q(gender__icontains=q) | 
+                        Q(mobile_number__icontains=q) | Q(emergency_contact__icontains=q) | Q(address__icontains=q) | 
+                        Q(age__icontains=q) | Q(room_no__icontains=q) | Q(blood_group__icontains=q)
+        )
         return Patient.objects.filter(search_query)
