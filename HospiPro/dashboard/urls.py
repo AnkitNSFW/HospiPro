@@ -22,4 +22,6 @@ urlpatterns = [
     path('delete_all_doctor', views.delete_all_doctor, name='delete_all_doctor'),
 
     path('something_went_wrong', views.something_went_wrong, name='something_went_wrong'),
+
+    path('test_api_call', views.test_api_call, name='test_api_call'),
 ]

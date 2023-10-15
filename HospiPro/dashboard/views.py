@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Doctor, Patient
+from .models import Doctor, Patient, BillItem
 from .generate_patient_and_doctor import *
 
 
@@ -165,3 +165,20 @@ def delete_all_doctor(response):
         return redirect('/doctors')
     else:
         return redirect('/something_went_wrong')
+
+
+def test_api_call(response):
+    p = Patient.objects.get(id=5313)
+    print("1111111")
+    # item = BillItem(name="blood",
+    #                 description="O+ blood",
+    #                 cost=100)
+    print('222222222')
+    p.billing.add(BillItem(name="blood",
+                    description="O+ blood",
+                    cost=100))
+    print('333333333333')
+    for items in p.billing:
+        print(items.name,items.description, items.cost)
+
+    return redirect('/')
