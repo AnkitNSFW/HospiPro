@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %} 
+
+{% load static %}
+
+{%block title%}
+    Pay bill
+{%endblock%}
+
+{%block extra_css%}
+<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+{%endblock%}
+
+{%block content%}
+    <form action="/billing/" method="POST">
+        {% csrf_token %}
+        <div class="input-field">
+            <label>Name</label>
+            <input type="text" placeholder="name" required name="name" autofocus="true">
+        </div>
+
+        <div class="input-field">
+            <label>Description</label>
+            <input type="string" placeholder="description" required name="description" maxlength="200">
+        </div>
+
+        <div class="input-field">
+            <label>Cost</label>
+            <input type="number" placeholder="cost" required name="cost">
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <button   class="nextBtn" style="align-self: flex-end;" type="submit">
+                <span class="btnText">Pay</span>
+                <i class="uil uil-navigator"></i>
+            </button>
+        </div>
+    </form>
+{%endblock%}

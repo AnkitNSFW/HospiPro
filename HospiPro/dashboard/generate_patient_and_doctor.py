@@ -18,7 +18,7 @@ def generate_patient(num):
                 room_no=random.randint(0,50),
                 email=fake.email(),
                 blood_group=random.choice(['A+','A-','B+','B-','AB+','AB-','O+','O-']),
-                bill=0.0,
+                total_bill=0.0,
                 paid_bill=0.0
             ).save()
         return True

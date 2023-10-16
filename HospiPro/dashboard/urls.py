@@ -19,6 +19,8 @@ urlpatterns = [
 
     path('billing', views.billing, name='billing'),
     path('billing/<int:id>', views.individual_billing, name='individual_billing'),
+    path('billing/pay_bill/<int:id>', views.pay_bill, name='pay_bill'),
+    path('billing/add_to_bill/<int:id>', views.add_to_bill, name='add_to_bill'),
 
     path('something_went_wrong', views.something_went_wrong, name='something_went_wrong'),
 

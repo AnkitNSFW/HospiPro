@@ -16,12 +16,47 @@
 {%block content%}
     {% if patient %}
         <div>
-            <a><button class="go_back_button" onclick="go_back()"><<Back</button></a>
+            <a>
+                <button class="go_back_button" onclick="go_back()" >
+                     < 
+                </button>
+            </a>
         </div>
         {%if item_list%}
+            <br><br>
 
-            <h3>Name: {{patient.first_name}} {{patient.last_name}}</h3>
-            
+            <table class="patient_table">
+                <tr>
+                    <th class="patient_label">ID</th>
+                    <td>{{patient.id}}</td>
+                </tr>
+                <tr>
+                    <th class="patient_label">Name</th>
+                    <td>
+                        <a style="color: white;" href="/patients/{{patient.id}}">
+                            {{patient.first_name}} {{patient.last_name}}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="patient_label">Mobile Number</th>
+                    <td>{{patient.mobile_number}}</td>
+                </tr>
+                <tr>
+                    <th class="patient_label">Age</th>
+                    <td>{{patient.age}}</td>
+                </tr>
+                <tr>
+                    <th class="patient_label">Room Number</th>
+                    <td>{{patient.room_no}}</td>
+                </tr>
+                <tr>
+                    <th class="patient_label">Email</th>
+                    <td>{{patient.email}}</td>
+                </tr>
+            </table>
+
+            <br><br>
             <table class="patient-table">
                 <tr>
                     <th>No</th>
@@ -70,6 +105,13 @@
             <h1 class="user_not_found_h1">User Not Found</h1>
         </div>
     {%endif%}
+    <br><br>
+    <a href="pay_bill/{{patient.id}}" class="add_item_button">
+        Pay Bill
+    </a>
+    <a href="add_to_bill/{{patient.id}}" class="delete_button">
+        Add to Bill
+    </a>
 {%endblock%}
 
 

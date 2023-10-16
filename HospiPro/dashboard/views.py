@@ -179,14 +179,39 @@ def individual_billing(response, id):
     except:
         return redirect('/something_went_wrong')
 
+def add_to_bill(response, id):
+    print(id)
+    try:
+        if response.method == 'GET':
+            context = {}
+            context['patient_id']=id
+            return render(response, 'dashboard/billing_add_to_bill.html', context=context)
+        elif response.method == 'POST':
+            BillItem(
+                patient_id=id,
+                name=response.POST['name'],
+                description=response.POST['description'],
+                cost=response.POST['cost']
+            ).save()
+            return redirect(f'/billing/{id}')
+    except:
+        return redirect('/something_went_wrong')
 
+def pay_bill(response, id):
+    try:
+        if response.method == 'GET':
+            return redirect('/billing/{id}')
+        elif response.method == 'POST':
+            return redirect('/billing/{id}')
+    except:
+        return redirect('/something_went_wrong')
 
 # temp things
 def api_add_patient(response, num):
     if generate_patient(num):
         return redirect('/patients')
-    else:
-        return redirect('/something_went_wrong')
+    # else:
+    #     return redirect('/something_went_wrong')
 
 def api_add_doctor(response, num):
     if generate_doctor(num):
@@ -208,8 +233,11 @@ def delete_all_doctor(response):
 
 
 def test_api_call(response):
-    # p = Patient.objects.get(id=25)
-    # p.paid_bill+=200
-    # p.save()
-
+    BillItem(
+        name = "bed",
+        description= 'bed no 12 for 30 days',
+        cost= 1000,
+        patient_id=29
+    ).save()
+    print("Item Added")
     return redirect('/')

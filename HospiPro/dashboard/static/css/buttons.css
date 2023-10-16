@@ -62,3 +62,51 @@
   .delete_button:active {
     top: 2px;
   }
+
+
+   /* Delete Patient Button */
+   .add_item_button {
+    padding: 10px 25px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .add_item_button {
+    border: 2px solid green;
+    z-index: 1;
+    color: white;
+  }
+  
+  .add_item_button:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: green;
+    transition: all 0.3s ease;
+  }
+  
+  .add_item_button:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+  
+  .add_item_button:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
+  
+  .add_item_button:active {
+    top: 2px;
+  }

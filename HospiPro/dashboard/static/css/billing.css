@@ -51,7 +51,7 @@ table, th, td {
 }
 
 .cost_width {
-  width: 100px;
+  width: 150px;
 }
 
 .text_right {
@@ -66,3 +66,42 @@ table, th, td {
     margin: 20px;
     font-size: 2em;
   }
+
+
+
+
+
+
+  .patient_table {
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    border: 1px solid;
+    border-color: white;
+    border-radius: 20px;
+}
+
+.patient_table th,
+.patient_table td {
+    padding: 10px;
+    text-align: left;
+
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+
+}
+
+.patient_table th {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+.patient_table td {
+    color: white;
+    width: 400px;
+}
+.patient_label {
+    font-weight: bold;
+}
