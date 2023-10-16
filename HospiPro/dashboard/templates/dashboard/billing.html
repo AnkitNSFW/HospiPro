@@ -3,11 +3,7 @@
 {% load static %}
 
 {%block title%}
-    {% if patient %}
-        {{patient.first_name}} {{patient.last_name}}
-    {% else %}
-        User Not Found
-    {% endif %}
+    Billing
 {%endblock%}
 
 {%block extra_css%}
@@ -38,8 +34,8 @@
                 <tr class="patient-data">
                     <td class="short_width">{{patient.id}}</td>
                     <td class="name_width">
-                        <a href="/patients/{{ patient.id }}" style="color: white; font-weight: bold;">
-                            {{ patient.first_name }} {{ patient.last_name }}
+                        <a href="/billing/{{ patient.id }}" style="color: white; font-weight: bold;">
+                            {{ patient.name }}
                         </a>
                     </td>
                     {% if patient.gender == "Male" %}
@@ -50,13 +46,15 @@
                         <td class="short_width">T</td>
                     {% endif %}
                     <td class="short_width">{{patient.mobile_number}}</td>
-                    <td class="short_width">{{patient.pending_bill}}</td>
+                    <td class="short_width">{{patient.total_bill}}</td>
                     <td class="short_width">{{patient.paid_bill}}</td>
 
-                    {% if (patient.paid_bill-patient.pending_bill)>=0 %}
-                        <td class="green_amount">+{{patient.paid_bill-patient.pending_bill}}</td>
+                    {% if patient.balance == 0 %}
+                    <td class="white_amount">0.0</td>
+                    {% elif patient.balance <= 0 %}
+                        <td class="green_amount">+{{patient.balance}}</td>
                     {% else %}
-                        <td class="red_amount">{{patient.paid_bill-patient.pending_bill}}</td>
+                        <td class="red_amount">-{{patient.balance}}</td>
                     {% endif %}
                 </tr>
             {%endfor%}

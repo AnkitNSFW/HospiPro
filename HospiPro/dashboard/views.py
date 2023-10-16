@@ -4,6 +4,7 @@ from .models import Doctor, Patient, BillItem
 from .generate_patient_and_doctor import *
 
 
+
 # Create your views here.
 def home(response):
     return render(response, 'dashboard/home.html')
@@ -145,7 +146,41 @@ def delete_patient(response, id):
 
 
 def billing(response):
-    pass
+    context = {}
+    context["patients"] = []
+    for patient in Patient.objects.all():
+        update_total_bill(patient.id)
+        context["patients"].append(
+            {"id": patient.id,
+            "name": patient.first_name+" "+patient.last_name,
+            "gender": patient.gender,
+            "mobile_number": patient.mobile_number,
+            "total_bill": patient.total_bill,
+            "paid_bill": patient.paid_bill,
+            "balance": patient.total_bill - patient.paid_bill
+            }
+        )
+
+    return render(response, 'dashboard/billing.html' ,context=context)
+
+def individual_billing(response, id):
+    try:
+        context = {}
+        update_total_bill(id=id)
+        patient = Patient.objects.get(id=id)
+        context['patient']=patient
+        
+        if patient:
+            context['total_bill'], context['item_list'] = patients_bill_items(id=id)
+            context["balance"] = patient.total_bill - patient.paid_bill
+            return render(response, 'dashboard/individual_billing.html' ,context=context)
+        else:
+            return redirect('/something_went_wrong')
+    except:
+        return redirect('/something_went_wrong')
+
+
+
 # temp things
 def api_add_patient(response, num):
     if generate_patient(num):
@@ -173,15 +208,8 @@ def delete_all_doctor(response):
 
 
 def test_api_call(response):
-    # p = Patient.objects.get(id=7)
-    # BillItem(name="blood",
-    #                 description="O+ blood",
-    #                 cost=100,
-    #                 patient=p).save()
-    cost = 0
-    for i in BillItem.objects.filter(patient_id=7):
-        cost += i.cost
-        print(i.cost)
-    print(f"-----{cost}")
+    # p = Patient.objects.get(id=25)
+    # p.paid_bill+=200
+    # p.save()
 
     return redirect('/')

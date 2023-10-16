@@ -1,7 +1,68 @@
-.red_amount {
-    color: red;
+.white_amount {
+    color: white;
 }
 
 .green_amount {
     color: green;
 }
+
+.red_amount {
+    color: red;
+}
+
+.white_text {
+  color: white;
+}
+
+
+
+.patient-table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    padding: 15px;
+    text-align: left;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #1c1c1c;
+    color: white;
+    font-weight: bold;
+  }
+  .patient-data {color: white;}
+
+
+
+.no_width {
+  width: 50px;
+}
+
+.name_width {
+  width: 150px;
+}
+
+.description_width {
+  width: 350px;
+}
+
+.cost_width {
+  width: 100px;
+}
+
+.text_right {
+  text-align: right;
+}
+
+
+
+  .no_billing_record{
+    color: white;
+    text-align: center;
+    margin: 20px;
+    font-size: 2em;
+  }

@@ -41,7 +41,7 @@ class Patient(models.Model):
     room_no = models.PositiveIntegerField()
     email = models.EmailField()
     blood_group = models.CharField(max_length=4)
-    pending_bill = models.DecimalField(max_digits=10, decimal_places=2)
+    total_bill = models.DecimalField(max_digits=10, decimal_places=2)
     paid_bill = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
