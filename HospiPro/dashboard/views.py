@@ -65,7 +65,6 @@ def doctors_to_search(response, to_search):
     context['doctors'] = Doctor.search(to_search)
     return render(response, 'dashboard/doctors.html', context=context)
 
-
 def add_patient(response):
     if response.method == "POST":
         first_name = response.POST['first_name']
@@ -138,15 +137,21 @@ def add_doctor(response):
 def something_went_wrong(response):
     return render(response, 'dashboard/something_went_wrong.html')
 
+def delete_patient(response, id):
+    if delete_individual_user(id=id):
+        return redirect('/patients')
+    else:
+        return redirect('/something_went_wrong')
 
 
+def billing(response):
+    pass
 # temp things
 def api_add_patient(response, num):
     if generate_patient(num):
         return redirect('/patients')
     else:
         return redirect('/something_went_wrong')
-
 
 def api_add_doctor(response, num):
     if generate_doctor(num):
@@ -168,17 +173,15 @@ def delete_all_doctor(response):
 
 
 def test_api_call(response):
-    p = Patient.objects.get(id=5313)
-    print("1111111")
-    # item = BillItem(name="blood",
+    # p = Patient.objects.get(id=7)
+    # BillItem(name="blood",
     #                 description="O+ blood",
-    #                 cost=100)
-    print('222222222')
-    p.billing.add(BillItem(name="blood",
-                    description="O+ blood",
-                    cost=100))
-    print('333333333333')
-    for items in p.billing:
-        print(items.name,items.description, items.cost)
+    #                 cost=100,
+    #                 patient=p).save()
+    cost = 0
+    for i in BillItem.objects.filter(patient_id=7):
+        cost += i.cost
+        print(i.cost)
+    print(f"-----{cost}")
 
     return redirect('/')

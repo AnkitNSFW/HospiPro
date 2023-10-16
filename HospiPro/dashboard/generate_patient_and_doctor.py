@@ -17,7 +17,9 @@ def generate_patient(num):
                 age=random.randint(0,100),
                 room_no=random.randint(0,50),
                 email=fake.email(),
-                blood_group=random.choice(['A+','A-','B+','B-','AB+','AB-','O+','O-'])
+                blood_group=random.choice(['A+','A-','B+','B-','AB+','AB-','O+','O-']),
+                bill=0.0,
+                paid_bill=0.0
             ).save()
         return True
     except:
@@ -54,6 +56,14 @@ def delete_patients():
 def delete_doctors():
     try:
         Doctor.objects.all().delete()
+        return True
+    except:
+        return False
+
+def delete_individual_user(id):
+    try:
+        patient = Patient.objects.get(id=id)
+        patient.delete()
         return True
     except:
         return False

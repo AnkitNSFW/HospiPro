@@ -12,6 +12,7 @@
 
 {%block extra_css%}
 <link rel="stylesheet" href="{% static 'css/individual_patient.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {%endblock%}
 
@@ -19,7 +20,7 @@
 {%block content%}
     {% if patient %}
         <div>
-            <a><button class="bn-32 bn32" onclick="go_back()"><- Go Back<Back</button></a>
+            <a><button class="go_back_button" onclick="go_back()"><<Back</button></a>
         </div>
         <div>
             <table class="patient-table">
@@ -67,7 +68,16 @@
                     <th class="patient-label">Blood Group</th>
                     <td>{{patient.blood_group}}</td>
                 </tr>
+                <tr>
+                    <th class="patient-label">Bill</th>
+                    <td>{{patient.blood_group}}</td>
+                </tr>
             </table>
+            <br>
+            <br>
+            <a href="/patients/delete/{{patient.id}}" class="delete_button">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
         </div>
     {% else %}
         <div class="user_not_found_div">

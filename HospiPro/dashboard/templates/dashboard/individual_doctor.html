@@ -12,6 +12,7 @@
 
 {%block extra_css%}
 <link rel="stylesheet" href="{% static 'css/individual_doctor.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {%endblock%}
 
@@ -19,7 +20,7 @@
 {%block content%}
     {% if doctor %}
         <div>
-            <a><button class="bn-32 bn32" onclick="go_back()"><- Go Back<Back</button></a>
+            <a><button class="go_back_button" onclick="go_back()"> < </button></a>
         </div>
         <div>
             <table class="doctor-table">
@@ -75,7 +76,6 @@
                     <th class="doctor-label">Specialty</th>
                     <td>{{doctor.specialty}}</td>
                 </tr>
-
             </table>
         </div>
     {% else %}

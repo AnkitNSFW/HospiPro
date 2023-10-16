@@ -1,13 +1,7 @@
 from django.db.models import Q
 from django.db import models
 from django.core.validators import RegexValidator
-
-class BillItem(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
-    cost = models.DecimalField(max_digits=10, decimal_places=2)
     
-
 class Doctor(models.Model):
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=255)
@@ -47,7 +41,8 @@ class Patient(models.Model):
     room_no = models.PositiveIntegerField()
     email = models.EmailField()
     blood_group = models.CharField(max_length=4)
-    billing = models.ManyToManyField(BillItem, related_name="bills")
+    pending_bill = models.DecimalField(max_digits=10, decimal_places=2)
+    paid_bill = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -58,5 +53,12 @@ class Patient(models.Model):
                         Q(age__icontains=q) | Q(room_no__icontains=q) | Q(blood_group__icontains=q)
         )
         return Patient.objects.filter(search_query)
+
+
+class BillItem(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=250)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
     
 

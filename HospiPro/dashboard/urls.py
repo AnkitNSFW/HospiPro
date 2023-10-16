@@ -16,12 +16,15 @@ urlpatterns = [
     path('add_patient', views.add_patient, name='add_patient'),
     path('add_doctor', views.add_doctor, name='add_doctor'),
 
+    path('patients/delete/<int:id>', views.delete_patient, name='delete_patient'),
+
+    path('something_went_wrong', views.something_went_wrong, name='something_went_wrong'),
+
+
     path('api_add_patient/<int:num>', views.api_add_patient, name='api_patinet'),
     path('delete_all_patient', views.delete_all_patient, name='delete_all_patinet'),
     path('api_add_doctor/<int:num>', views.api_add_doctor, name='api_doctor'),
     path('delete_all_doctor', views.delete_all_doctor, name='delete_all_doctor'),
-
-    path('something_went_wrong', views.something_went_wrong, name='something_went_wrong'),
 
     path('test_api_call', views.test_api_call, name='test_api_call'),
 ]

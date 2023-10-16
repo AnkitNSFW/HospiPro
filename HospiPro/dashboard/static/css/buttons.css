@@ -1,0 +1,64 @@
+.go_back_button {
+    background-color: black;
+    font-family: lato,sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px 40px 10px 40px;
+    position: relative;
+    border: 3px solid #ffffff;
+    border-radius: 25px;
+  }
+
+
+
+
+  /* Delete Patient Button */
+  .delete_button {
+    padding: 10px 25px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .delete_button {
+    border: 2px solid red;
+    z-index: 1;
+    color: white;
+  }
+  
+  .delete_button:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: red;
+    transition: all 0.3s ease;
+  }
+  
+  .delete_button:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+  
+  .delete_button:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
+  
+  .delete_button:active {
+    top: 2px;
+  }
