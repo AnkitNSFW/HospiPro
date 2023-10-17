@@ -21,6 +21,8 @@ python manage.py migrate
 ```bash
  py manage.py runserver
 ```
+
+## Screenshorts of the GUI.
 ![image](https://github.com/AnkitNSFW/HospiPro/assets/105564514/c21e6bff-b05a-465f-b2a7-ad2d8801cb55)
 
 ![image](https://github.com/AnkitNSFW/HospiPro/assets/105564514/183a9096-41b7-44e5-8335-15bdfb5b23e2)
