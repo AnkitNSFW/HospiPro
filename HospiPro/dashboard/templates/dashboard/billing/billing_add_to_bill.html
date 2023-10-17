@@ -7,31 +7,31 @@
 {%endblock%}
 
 {%block extra_css%}
-<link rel="stylesheet" href="{% static 'css/add_patient.css' %}">
+<link rel="stylesheet" href="{% static 'css/billing_from.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 {%endblock%}
 
 {%block content%}
-    <form action="/billing/" method="POST">
+    <form action="/billing/add_to_bill/{{patient_id}}" method="POST">
         {% csrf_token %}
-        <div class="input-field">
+        <div>
             <label>Name</label>
             <input type="text" placeholder="name" required name="name" autofocus="true">
         </div>
 
-        <div class="input-field">
+        <div>
             <label>Description</label>
             <input type="string" placeholder="description" required name="description" maxlength="200">
         </div>
 
-        <div class="input-field">
+        <div>
             <label>Cost</label>
             <input type="number" placeholder="cost" required name="cost">
         </div>
-        <div style="display: flex; flex-direction: column; align-items: flex-start;">
-            <button   class="nextBtn" style="align-self: flex-end;" type="submit">
-                <span class="btnText">Pay</span>
-                <i class="uil uil-navigator"></i>
+        <div>
+            <button class="delete_button" type="submit" class="plain-button">
+                    Add to Bill
             </button>
         </div>
     </form>

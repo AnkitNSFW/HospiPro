@@ -16,8 +16,8 @@
 {%block content%}
     {% if patient %}
         <div>
-            <a>
-                <button class="go_back_button" onclick="go_back()" >
+            <a href="/billing">
+                <button class="go_back_button" >
                      < 
                 </button>
             </a>
@@ -88,13 +88,12 @@
                     <td style="border: 0px" />
                     <td style="border: 0px" />
                     <td class="text_right">Balance:</td>
-                    {% if balance == 0.0 %}
-                        <td class="white_amount">₹0.0</td>
-                    {% elif patient.balance < 0 %}
-                        <td class="green_amount">+₹{{balance}}</td>
-                    {% else %}
-                        <td class="red_amount">-₹{{balance}}</td>
-                    {% endif %}
+                    {% if balance < 0 %}
+                        <td class="red_amount">₹{{balance}}</td>
+                    {%else%}
+                        <td class="green_amount">₹{{balance}}</td>
+                    {%endif%}
+                    
                 </tr>
             </table>
         {%else%}

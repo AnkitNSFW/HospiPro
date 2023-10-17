@@ -12,7 +12,7 @@ def home(response):
 def patients(response):
     context = {}
     context['patients'] = Patient.objects.all()
-    return render(response, 'dashboard/patients.html', context=context)
+    return render(response, 'dashboard/patient/patients.html', context=context)
 
 def patients_id(response, id):
     context = {}
@@ -22,7 +22,7 @@ def patients_id(response, id):
     except:
         context['patient'] = []
     print(id)
-    return render(response, 'dashboard/individual_patient.html', context=context)
+    return render(response, 'dashboard/patient/individual_patient.html', context=context)
 
 # if someone directly goes to /search/ without to_srarch redirecting to /patient
 def patients_search(response):
@@ -35,12 +35,12 @@ def patients_to_search(response, to_search):
     except:
         context['patients'] = []
 
-    return render(response, 'dashboard/patients.html', context=context)
+    return render(response, 'dashboard/patient/patients.html', context=context)
 
 def doctors(response):
     context = {}
     context['doctors'] = Doctor.objects.all()
-    return render(response, 'dashboard/doctors.html', context=context)
+    return render(response, 'dashboard/doctor/doctors.html', context=context)
 
 def doctors_id(response, id):
     context = {}
@@ -50,7 +50,7 @@ def doctors_id(response, id):
     except:
         context['doctor'] = []
     print(id)
-    return render(response, 'dashboard/individual_doctor.html', context=context)
+    return render(response, 'dashboard/doctor/individual_doctor.html', context=context)
 
 # if someone directly goes to /search/ without to_srarch redirecting to /doctor
 def doctors_search(response):
@@ -64,7 +64,7 @@ def doctors_to_search(response, to_search):
     # except:
     #     context['doctors'] = []
     context['doctors'] = Doctor.search(to_search)
-    return render(response, 'dashboard/doctors.html', context=context)
+    return render(response, 'dashboard/doctor/doctors.html', context=context)
 
 def add_patient(response):
     if response.method == "POST":
@@ -95,7 +95,7 @@ def add_patient(response):
         patient.save()
         return redirect("/")
     else:
-        return render(response, 'dashboard/add_patient.html')
+        return render(response, 'dashboard/patient/add_patient.html')
     
 def add_doctor(response):
     if response.method == "POST":
@@ -133,7 +133,7 @@ def add_doctor(response):
 
         return redirect("/")
     else:
-        return render(response, 'dashboard/add_doctor.html')
+        return render(response, 'dashboard/doctor/add_doctor.html')
 
 def something_went_wrong(response):
     return render(response, 'dashboard/something_went_wrong.html')
@@ -161,7 +161,7 @@ def billing(response):
             }
         )
 
-    return render(response, 'dashboard/billing.html' ,context=context)
+    return render(response, 'dashboard/billing/billing.html' ,context=context)
 
 def individual_billing(response, id):
     try:
@@ -172,20 +172,19 @@ def individual_billing(response, id):
         
         if patient:
             context['total_bill'], context['item_list'] = patients_bill_items(id=id)
-            context["balance"] = patient.total_bill - patient.paid_bill
-            return render(response, 'dashboard/individual_billing.html' ,context=context)
+            context['balance'] = patient.paid_bill-patient.total_bill
+            return render(response, 'dashboard/billing/individual_billing.html' ,context=context)
         else:
             return redirect('/something_went_wrong')
     except:
         return redirect('/something_went_wrong')
 
 def add_to_bill(response, id):
-    print(id)
     try:
         if response.method == 'GET':
             context = {}
             context['patient_id']=id
-            return render(response, 'dashboard/billing_add_to_bill.html', context=context)
+            return render(response, 'dashboard/billing/billing_add_to_bill.html', context=context)
         elif response.method == 'POST':
             BillItem(
                 patient_id=id,
@@ -200,9 +199,21 @@ def add_to_bill(response, id):
 def pay_bill(response, id):
     try:
         if response.method == 'GET':
-            return redirect('/billing/{id}')
+            update_total_bill(id=id)
+            patient = Patient.objects.get(id=id)
+            context = {}
+            context['patient_name'] = patient.first_name+" "+patient.last_name
+            context['patient_id'] = patient.id
+            context['total_bill'] = patient.total_bill
+            context['paid_bill'] = patient.paid_bill
+            context['balance'] = patient.paid_bill-patient.total_bill
+
+            return render(response, 'dashboard/billing/billing_pay_bill.html', context=context)
         elif response.method == 'POST':
-            return redirect('/billing/{id}')
+            patient = Patient.objects.get(id=id)
+            patient.paid_bill += int(response.POST['paid_amount'])
+            patient.save()
+            return redirect(f'/billing/{id}')
     except:
         return redirect('/something_went_wrong')
 
