@@ -244,11 +244,4 @@ def delete_all_doctor(response):
 
 
 def test_api_call(response):
-    BillItem(
-        name = "bed",
-        description= 'bed no 12 for 30 days',
-        cost= 1000,
-        patient_id=29
-    ).save()
-    print("Item Added")
     return redirect('/')
