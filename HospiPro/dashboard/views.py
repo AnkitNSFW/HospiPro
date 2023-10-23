@@ -90,7 +90,9 @@ def add_patient(response):
             age=age,
             room_no=room_no,
             email=email,
-            blood_group=blood_group
+            blood_group=blood_group,
+            paid_bill=0,
+            total_bill=0
         )
         patient.save()
         return redirect("/")
